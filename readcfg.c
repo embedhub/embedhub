@@ -6,7 +6,7 @@
 #include <errno.h>
 #include "readcfg.h" 
  
-/*   ɾ����ߵĿո�   */
+/*   删除左边的空格   */
 char * l_trim(char * szOutput, const char *szInput)
 {
 	assert(szInput != NULL);
@@ -17,7 +17,7 @@ char * l_trim(char * szOutput, const char *szInput)
 	return strcpy(szOutput, szInput);
 }
  
-/*   ɾ���ұߵĿո�   */
+/*   删除右边的空格   */
 char *r_trim(char *szOutput, const char *szInput)
 {
 	char *p = NULL;
@@ -32,7 +32,7 @@ char *r_trim(char *szOutput, const char *szInput)
 	return szOutput;
 }
  
-/*   ɾ�����ߵĿո�   */
+/*   删除两边的空格   */
 char * a_trim(char * szOutput, const char * szInput)
 {
 	char *p = NULL;

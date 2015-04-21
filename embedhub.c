@@ -16,8 +16,8 @@
 pthread_t pthid_timer;
 pthread_t pthid_tcpconn;
 
-void timer(void);//¼ÆÊ±½ø³Ì£¬Áô×ö±¸ÓÃ¡£
-void *tcprecvfromcli(void *arg);//TCP¿Í»§¶Ë½ÓÊÕÏß³Ì
+void timer(void);//è®¡æ—¶è¿›ç¨‹ï¼Œç•™åšå¤‡ç”¨ã€‚
+void *tcprecvfromcli(void *arg);//TCPå®¢æˆ·ç«¯æ¥æ”¶çº¿ç¨‹
 
 int tcpconn(void)
 {
@@ -43,17 +43,17 @@ int tcpconn(void)
 	
 	if(bind(ser_sockfd,(struct sockaddr *)&ser_addr,sizeof(ser_addr)) == -1)
 	{
-		printf("°ó¶¨Ì×½Ó×ÖÊ§°Ü:%s\n",strerror(errno));
+		printf("ç»‘å®šå¥—æ¥å­—å¤±è´¥:%s\n",strerror(errno));
 		return -1;
 	}
 	
 	if(listen(ser_sockfd,5) == -1)
 	{
-		printf("¼àÌıÊ§°Ü£º%s\n", strerror(errno));
+		printf("ç›‘å¬å¤±è´¥ï¼š%s\n", strerror(errno));
 		return -1;
 	}
 	
-	printf("¼àÌı¶Ë¿Ú£º%d\n",EMBSERPORT);
+	printf("ç›‘å¬ç«¯å£ï¼š%d\n",EMBSERPORT);
 	fflush(stdout);
 	while(1)
 	{
@@ -61,14 +61,14 @@ int tcpconn(void)
 		//printf("User ID is :%d\n", userid);
 		if(userid == -1)
 		{
-			printf("Á¬½ÓÒÑ´ïµ½ÏµÍ³×î´óÏŞ¶È¡£µÈ´ıÊÍ·ÅÖĞ¡£¡£¡£\n");
+			printf("è¿æ¥å·²è¾¾åˆ°ç³»ç»Ÿæœ€å¤§é™åº¦ã€‚ç­‰å¾…é‡Šæ”¾ä¸­ã€‚ã€‚ã€‚\n");
 			while( (userid = getbitmap()) == -1)
 			{
 				printf(" * ");
 				fflush(stdout);
 				sleep(2);
 			}
-			printf("ÓĞ¿Í»§¶Ë¶Ï¿ª£¬¿ÉÒÔ½øĞĞĞÂµÄÁ¬½Ó\n");
+			printf("æœ‰å®¢æˆ·ç«¯æ–­å¼€ï¼Œå¯ä»¥è¿›è¡Œæ–°çš„è¿æ¥\n");
 		}
 		
 		addlen = sizeof(struct sockaddr);
@@ -77,11 +77,11 @@ int tcpconn(void)
 
 		if(user[userid].fd == -1)
 		{
-			printf("Á¬½Ó½¨Á¢Ê§°Ü£º%s\n", strerror(errno));
+			printf("è¿æ¥å»ºç«‹å¤±è´¥ï¼š%s\n", strerror(errno));
 		}
 		else
 		{
-			printf("¿Í»§¶Ë( %d )Á¬½ÓÒÑ¾­½¨Á¢£¡:%s:%d\n", userid, (char *)inet_ntoa(user[userid].cli_addr.sin_addr), user[userid].cli_addr.sin_port);
+			printf("å®¢æˆ·ç«¯( %d )è¿æ¥å·²ç»å»ºç«‹ï¼:%s:%d\n", userid, (char *)inet_ntoa(user[userid].cli_addr.sin_addr), user[userid].cli_addr.sin_port);
 			setbitmap(userid);
 		}
 		
@@ -164,7 +164,7 @@ void *tcprecvfromcli(void *arg)
 			err = errno;
 			
 			if((err != EAGAIN) && (err != EWOULDBLOCK) && (err != EINTR)){
-				printf("TCPÁ¬½Ó( %d )ÒÑ¾­¶Ï¿ª£¡\n", userid);fflush(stdout);
+				printf("TCPè¿æ¥( %d )å·²ç»æ–­å¼€ï¼\n", userid);fflush(stdout);
 				
 				resetbitmap(userid);
 				close(user[userid].fd);
@@ -174,7 +174,7 @@ void *tcprecvfromcli(void *arg)
 
 		user[userid].buf[recv_len]='\0';
 		
-		printf("¿Í»§¶Ë( %d )ÊÕµ½%d×Ö½ÚÊı¾İ£º%s\n", userid, recv_len, user[userid].buf);fflush(stdout);
+		printf("å®¢æˆ·ç«¯( %d )æ”¶åˆ°%då­—èŠ‚æ•°æ®ï¼š%s\n", userid, recv_len, user[userid].buf);fflush(stdout);
 	}
 	close(user[userid].fd);
 	

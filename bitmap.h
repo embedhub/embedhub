@@ -1,11 +1,11 @@
 #ifndef __BITMAP_H__
 #define __BITMAP_H__
 
-#define getbit(hex,bit)		((hex) & (1<<(bit)))	//»ñÈ¡hexµÄµÚbitÎ»ÊÇ0»¹ÊÇ1
-#define _getbit(hex,bit)	( ((hex) & (1<<(bit))) >> bit )	//»ñÈ¡hexµÄµÚbitÎ»ÊÇ0»¹ÊÇ1²¢ÇÒÒÆÎ»
-#define setbit(hex,bit)		((hex) |= (1<<(bit)))	//ÉèÖÃhexµÄµÚbitÎ»Îª1
-#define resetbit(hex,bit)	((hex) &= ( ~(1<<(bit))))//ÉèÖÃhexµÄµÚbitÎ»Îª0
-#define inverbit(hex,bit)	(getbit(hex,bit)?resetbit(hex,bit):setbit(hex,bit))//·­×ªhexµÄµÚbitÎ»
+#define getbit(hex,bit)		((hex) & (1<<(bit)))	//è·å–hexçš„ç¬¬bitä½æ˜¯0è¿˜æ˜¯1
+#define _getbit(hex,bit)	( ((hex) & (1<<(bit))) >> bit )	//è·å–hexçš„ç¬¬bitä½æ˜¯0è¿˜æ˜¯1å¹¶ä¸”ç§»ä½
+#define setbit(hex,bit)		((hex) |= (1<<(bit)))	//è®¾ç½®hexçš„ç¬¬bitä½ä¸º1
+#define resetbit(hex,bit)	((hex) &= ( ~(1<<(bit))))//è®¾ç½®hexçš„ç¬¬bitä½ä¸º0
+#define inverbit(hex,bit)	(getbit(hex,bit)?resetbit(hex,bit):setbit(hex,bit))//ç¿»è½¬hexçš„ç¬¬bitä½
 
 unsigned int SIZEOFBITMAP;
 
